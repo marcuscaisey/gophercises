@@ -1,4 +1,4 @@
-module github.com/gophercises/urlshort
+module github.com/marcuscaisey/gophercises/2-urlshort
 
 go 1.17
 
