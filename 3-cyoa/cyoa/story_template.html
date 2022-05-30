@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Choose your own andventure!</title>
+  </head>
+
+  <body>
+    <h1>{{.Title}}</h1>
+    {{range .Story}}
+    <p>{{.}}</p>
+    {{end}}
+    <ul>
+      {{range .Options}}
+      <li><a href="{{.Arc}}">{{.Text}}</a></li>
+      {{end}}
+    </ul>
+
+    <footer>
+      <a href="/">Go back to start</a>
+    </footer>
+  </body>
+</html>
