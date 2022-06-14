@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var problemsFilePath = flag.String("problems", "problems.csv", "problems csv file")
+var problemsFilePath = flag.String("problems", "test_data/problems.csv", "problems csv file")
 var timeout = flag.Duration("timeout", 30*time.Second, "time limit for all questions to be answered within")
 
 func main() {

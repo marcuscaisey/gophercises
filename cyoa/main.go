@@ -7,8 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/marcuscaisey/gophercises/cyoa/cyoa"
 )
 
 var arcFile = flag.String("story-arcs", "", "JSON file with the map of arc name to story arcs in")
@@ -28,12 +26,12 @@ func main() {
 		exit("open story arcs file: %s", err)
 	}
 
-	arcNameToArc := map[string]cyoa.StoryArc{}
+	arcNameToArc := map[string]StoryArc{}
 	if err := json.NewDecoder(arcFileReader).Decode(&arcNameToArc); err != nil {
 		exit("decode story arcs file from JSON: %s", err)
 	}
 
-	handler := cyoa.MustNewHandler(arcNameToArc)
+	handler := MustNewHandler(arcNameToArc)
 
 	log.Printf("serving on :%d", *port)
 	http.Handle("/", handler)
