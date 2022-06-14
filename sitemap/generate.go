@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/marcuscaisey/gophercises/4-link/links"
+	"github.com/marcuscaisey/gophercises/links"
 )
 
 type extractResult struct {

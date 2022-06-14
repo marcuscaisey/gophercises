@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/marcuscaisey/gophercises/5-sitemap/sitemap"
+	"github.com/marcuscaisey/gophercises/sitemap"
 )
 
 var (
