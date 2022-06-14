@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/marcuscaisey/gophercises/3-cyoa/cyoa"
+	"github.com/marcuscaisey/gophercises/cyoa/cyoa"
 )
 
 var arcFile = flag.String("story-arcs", "", "JSON file with the map of arc name to story arcs in")
