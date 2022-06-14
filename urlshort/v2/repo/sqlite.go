@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/marcuscaisey/gophercises/2-urlshort/v2/errors"
-	"github.com/marcuscaisey/gophercises/2-urlshort/v2/errors/codes"
+	"github.com/marcuscaisey/gophercises/urlshort/v2/errors"
+	"github.com/marcuscaisey/gophercises/urlshort/v2/errors/codes"
 	_ "github.com/mattn/go-sqlite3"
 )
 

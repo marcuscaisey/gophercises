@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/marcuscaisey/gophercises/2-urlshort/v2/repo"
-	"github.com/marcuscaisey/gophercises/2-urlshort/v2/server"
+	"github.com/marcuscaisey/gophercises/urlshort/v2/repo"
+	"github.com/marcuscaisey/gophercises/urlshort/v2/server"
 )
 
 var sqliteFile = flag.String("db-file", "db.sqlite", "Path to SQLite DB")
