@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/marcuscaisey/gophercises/4-link/links"
+	"github.com/marcuscaisey/gophercises/links/links"
 )
 
 var file = flag.String("file", "", "HTML file to parse")

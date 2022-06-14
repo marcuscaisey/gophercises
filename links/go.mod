@@ -1,4 +1,4 @@
-module github.com/marcuscaisey/gophercises/4-link
+module github.com/marcuscaisey/gophercises/links
 
 go 1.18
 
