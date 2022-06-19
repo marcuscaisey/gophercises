@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"path"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -12,20 +12,23 @@ import (
 	"github.com/marcuscaisey/gophercises/task/repo"
 )
 
-const configDir = ".task"
-const defaultDBFile = "tasks.db"
-
 type taskRepository interface {
 	Add(task string) error
-	MarkAsComplete(index int) (string, error)
 	ListIncomplete() ([]string, error)
+	ListCompleted(since time.Time) ([]string, error)
+	MarkAsComplete(taskNum int) (string, error)
+	Remove(taskNum int) (string, error)
 }
 
 var rootCmd = &cobra.Command{
 	Use:   "task [command]",
 	Short: "task is a CLI for managing your TODOs.",
+	Long: "task is a CLI for managing your TODOs.\n\n" +
+		"The --file flag can be passed to customise where tasks are stored or you can set\n" +
+		"the \"tasks_file\" key in the config file located at ~/.task/config.yaml.",
 }
 
+// Execute runs the task CLI.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
@@ -34,31 +37,14 @@ func Execute() {
 
 func init() {
 	cobra.EnableCommandSorting = false
-	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringP("file", "f", "", fmt.Sprintf(`file used to store tasks (default "~/%s/%s")`, configDir, defaultDBFile))
 
 	rootCmd.AddCommand(addCmd(initTaskRepo))
 	rootCmd.AddCommand(listCmd(initTaskRepo))
+	rootCmd.AddCommand(completedCmd(initTaskRepo))
 	rootCmd.AddCommand(doCmd(initTaskRepo))
-}
-
-func initConfig() {
-	homeDir := getHomeDir()
-	viper.AddConfigPath(path.Join(homeDir, configDir))
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-
-	viper.BindPFlag("tasks_file", rootCmd.PersistentFlags().Lookup("file"))
-
-	if err := viper.ReadInConfig(); err != nil {
-		var notFoundErr viper.ConfigFileNotFoundError
-		if !errors.As(err, &notFoundErr) {
-			cobra.CheckErr(fmt.Errorf("Unable to read config: %s", err))
-		}
-	}
-
-	viper.AutomaticEnv()
+	rootCmd.AddCommand(rmCmd(initTaskRepo))
 }
 
 func initTaskRepo() (taskRepository, error) {

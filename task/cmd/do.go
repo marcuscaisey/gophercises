@@ -27,7 +27,7 @@ func doCmd(initTaskRepo func() (taskRepository, error)) *cobra.Command {
 			task, err := taskRepo.MarkAsComplete(taskNum)
 			if err != nil {
 				if errors.Is(err, repo.ErrTaskMissing) {
-					return fmt.Errorf("task %d does not exist.", taskNum)
+					return fmt.Errorf("Task %d does not exist", taskNum)
 				}
 				return fmt.Errorf("Unable to mark task %d as completed: %s", taskNum, err)
 			}
